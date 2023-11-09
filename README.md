@@ -9,3 +9,4 @@
 - fazer cadastro de cargos com vagas e etc pelo sistema (haha threads haha) e sla, municipios também, não sei
 - fazer tela de perfil de usuario pra qe ela possa alterar seus dados
 - fazer filtro de cargo por municipio no cadastro :)
+- checagem de dados do login com stream :))))) (ai corta td os requisitos do professor)
