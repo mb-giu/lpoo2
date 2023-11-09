@@ -46,6 +46,8 @@ public class CadastroParticipanteGUI extends JFrame {
 
         comboBoxMunicipio = new JComboBox<>(municipios.toArray(new String[0]));
         comboBoxCargo = new JComboBox<>(cargos.toArray(new String[0]));
+        JScrollPane scrollPaneMunicipio = new JScrollPane(comboBoxMunicipio);
+        JScrollPane scrollPaneCargo = new JScrollPane(comboBoxCargo);
 
 
         buttonCadastrar = new JButton("Cadastrar");
