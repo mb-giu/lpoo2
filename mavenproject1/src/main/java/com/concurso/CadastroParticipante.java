@@ -2,11 +2,9 @@ package com.concurso;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
-public class CadastroParticipanteGUI extends JFrame {
+public class CadastroParticipante extends JFrame {
     private JTextField fieldNome;
     private JTextField fieldCPF;
     private JPasswordField fieldSenha;
@@ -17,7 +15,7 @@ public class CadastroParticipanteGUI extends JFrame {
     private JComboBox<String> comboBoxCargo;
     private JButton buttonCadastrar;
 
-    public CadastroParticipanteGUI(List<String> listaMunicipios, List<String> listaCargos) {
+    public CadastroParticipante(List<String> listaMunicipios, List<String> listaCargos) {
         initComponents(listaMunicipios, listaCargos);
     }
 
@@ -52,11 +50,9 @@ public class CadastroParticipanteGUI extends JFrame {
 
         buttonCadastrar = new JButton("Cadastrar");
 
-        buttonCadastrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cadastrarParticipante();
-            }
+        buttonCadastrar.addActionListener(e -> {
+            Participante participante = cadastrarParticipante();
+            exibirInicialParticipante(participante);
         });
 
         // componentes do painel
@@ -80,33 +76,28 @@ public class CadastroParticipanteGUI extends JFrame {
         panel.add(buttonCadastrar);
 
         getContentPane().add(panel);
-        setSize(400, 300);
+        setSize(500, 400);
+        setResizable(false);
         setLocationRelativeTo(null);
     }
 
-    private void cadastrarParticipante() {
-        // Obter dados do formulário
+    private void exibirInicialParticipante(Participante participante) {
+        InicialParticipante inicialParticipante = new InicialParticipante(participante);
+        inicialParticipante.setVisible(true);
+        CadastroParticipante.this.dispose();
+    }
+
+    private Participante cadastrarParticipante() {
         String nome = fieldNome.getText();
         String CPF = fieldCPF.getText();
         String senha = new String(fieldSenha.getPassword());
         String endereco = fieldEndereco.getText();
         String dataNascimento = fieldDataNascimento.getText();
         String telefone = fieldTelefone.getText();
-        String municipioSelecionado = (String) comboBoxMunicipio.getSelectedItem();
         String cargoSelecionado = (String) comboBoxCargo.getSelectedItem();
+        String municipioSelecionado = (String) comboBoxMunicipio.getSelectedItem();
 
-        // Realizar a lógica de cadastro do participante
-        // Exemplo: imprimir os dados cadastrados
-        /*System.out.println("Nome: " + nome);
-        System.out.println("CPF: " + CPF);
-        System.out.println("Senha: " + senha);
-        System.out.println("Endereço: " + endereco);
-        System.out.println("Data de Nascimento: " + dataNascimento);
-        System.out.println("Telefone: " + telefone);
-        System.out.println("Município: " + municipioSelecionado);
-        System.out.println("Cargo: " + cargoSelecionado);
-        */
-        // Lógica adicional para salvar os dados no sistema
+        // Agora, chame o método da classe GerenciadorCadastro
+        return GerenciarCadastro.cadastrarParticipante(2, CPF, senha, nome, endereco, dataNascimento, telefone, cargoSelecionado, municipioSelecionado);
     }
-
 }

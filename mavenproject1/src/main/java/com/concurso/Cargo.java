@@ -53,7 +53,13 @@ public class Cargo {
     }
    
     
-        // Getters e Setters
+  // Getters e Setters
+    public int getId() {
+        return id;
+    }
+
+    // Setter removido para o campo id, pois ele é final e não pode ser modificado após a inicialização
+
     public Municipio getMunicipio() {
         return municipio;
     }
@@ -61,11 +67,11 @@ public class Cargo {
     public void setMunicipio(Municipio municipio) {
         this.municipio = municipio;
     }
-    
-     public Vaga getVaga() {
+
+    public Vaga getVaga() {
         return vaga;
     }
-    
+
     public String getNome() {
         return nome;
     }

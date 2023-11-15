@@ -1,17 +1,28 @@
 package com.concurso;
 
-import java.util.*;
-
 public class Participante extends Usuario {
-    public Participante(int perfil,String CPF, String senha, String nome, String endereco, String dataDeNascimento, String telefone, String cargo) {
-        super(2,CPF, senha, nome, endereco, dataDeNascimento, telefone);
+    private String cargo;
+    private Municipio municipio;
+
+    public Participante(int perfil, String CPF, String senha, String nome, String endereco, String dataDeNascimento, String telefone, String cargo, Municipio municipio) {
+        super(2, CPF, senha, nome, endereco, dataDeNascimento, telefone);
+        this.cargo = cargo;
+        this.municipio = municipio;
     }
 
-//public class Participante extends Municipio {
-//    public Participante(String nomeMunicipio) {
-//        super(nomeMunicipio);
-//    }
+    public String getCargo() {
+        return cargo;
+    }
 
-//Private Cargo cargo;
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
 
+    public Municipio getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
+    }
 }
