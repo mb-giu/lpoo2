@@ -3,7 +3,7 @@ package com.concurso;
 import javax.swing.*;
 import java.awt.*;
 
-public class InicialParticipante extends JFrame {
+public class PerfilParticipante extends JFrame {
     private JLabel labelNome;
     private JLabel labelCPF;
     private JLabel labelEndereco;
@@ -12,7 +12,7 @@ public class InicialParticipante extends JFrame {
     private JLabel labelMunicipio;
     private JLabel labelCargo;
 
-    public InicialParticipante(Participante participante) {
+    public PerfilParticipante(Participante participante) {
         initComponents(participante);
     }
 

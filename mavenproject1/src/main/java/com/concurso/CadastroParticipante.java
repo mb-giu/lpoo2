@@ -81,7 +81,7 @@ public class CadastroParticipante extends JFrame {
     }
 
     private void exibirInicialParticipante(Participante participante) {
-        InicialParticipante inicialParticipante = new InicialParticipante(participante);
+        PerfilParticipante inicialParticipante = new PerfilParticipante(participante);
         inicialParticipante.setVisible(true);
         CadastroParticipante.this.dispose();
     }
