@@ -11,12 +11,12 @@ public class GerenciarCadastro {
     private static Map<Integer, Cargo> cargos = new HashMap<>();
     private static Map<Integer, InscricaoVaga> inscricoes = new HashMap<>();
 
-    public static void cadastrarParticipante(int perfil, String CPF, String senha, String nome, String endereco,
-                                            String dataDeNascimento, String telefone, String cargo,String municipio) {
-        Participante participante = new Participante(perfil, CPF, senha, nome, endereco, dataDeNascimento, telefone, cargo,municipio);
+    public static Participante cadastrarParticipante(int perfil, String CPF, String senha, String nome, String endereco,
+                                            String dataDeNascimento, String telefone, Cargo cargo, Municipio municipio) {
+        Participante participante = new Participante(perfil, CPF, senha, nome, endereco, dataDeNascimento, telefone, cargo, municipio);
         participantes.put(participante.getId(), participante);
+        return participante;
     }
-
     public static void cadastrarFuncionario(int perfil, String CPF, String senha, String nome, String endereco,
                                             String dataDeNascimento, String telefone, String cargo) {
         Funcionario funcionario = new Funcionario(perfil, CPF, senha, nome, endereco, dataDeNascimento, telefone, cargo);
@@ -33,7 +33,7 @@ public class GerenciarCadastro {
         inscricoes.put(inscricaoVaga.getCargo().getId(), inscricaoVaga);
     }
 
-    public static List<String> obterCargos() {
+   public static List<String> obterCargos() {
         List<String> listaCargos = new ArrayList<>();
         for (Cargo cargo : cargos.values()) {
             listaCargos.add(cargo.getNome());
@@ -52,4 +52,7 @@ public class GerenciarCadastro {
     // Adicione métodos semelhantes para obter funcionários, vagas e inscrições
 
     // Adicione métodos para atualizar, excluir e buscar dados conforme necessário
+    
+    
+    
 }

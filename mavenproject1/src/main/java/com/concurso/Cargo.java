@@ -87,4 +87,9 @@ public class Cargo {
     public void setSalario(double salario) {
         this.salario = salario;
     }
+    
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

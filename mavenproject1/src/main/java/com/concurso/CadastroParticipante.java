@@ -11,8 +11,8 @@ public class CadastroParticipante extends JFrame {
     private JTextField fieldEndereco;
     private JTextField fieldDataNascimento;
     private JTextField fieldTelefone;
-    private JComboBox<String> comboBoxMunicipio;
-    private JComboBox<String> comboBoxCargo;
+    private JComboBox<Municipio> comboBoxMunicipio;
+    private JComboBox<Cargo> comboBoxCargo;
     private JButton buttonCadastrar;
 
     public CadastroParticipante(List<String> listaMunicipios, List<String> listaCargos) {
@@ -42,17 +42,16 @@ public class CadastroParticipante extends JFrame {
         fieldDataNascimento = new JTextField(10);
         fieldTelefone = new JTextField(10);
 
-        comboBoxMunicipio = new JComboBox<>(municipios.toArray(new String[0]));
-        comboBoxCargo = new JComboBox<>(cargos.toArray(new String[0]));
-        JScrollPane scrollPaneMunicipio = new JScrollPane(comboBoxMunicipio);
-        JScrollPane scrollPaneCargo = new JScrollPane(comboBoxCargo);
-
+        comboBoxMunicipio = new JComboBox<>(municipios.stream().map(nome -> new Municipio(nome, "Estado Padrão")).toArray(Municipio[]::new));
+        comboBoxCargo = new JComboBox<>(cargos.stream().map(nome -> new Cargo(nome, 0.0, 0)).toArray(Cargo[]::new));
 
         buttonCadastrar = new JButton("Cadastrar");
 
         buttonCadastrar.addActionListener(e -> {
+            System.out.println("botão antes");
             Participante participante = cadastrarParticipante();
             exibirInicialParticipante(participante);
+            System.out.println("botão pós metodo ");
         });
 
         // componentes do painel
@@ -94,10 +93,20 @@ public class CadastroParticipante extends JFrame {
         String endereco = fieldEndereco.getText();
         String dataNascimento = fieldDataNascimento.getText();
         String telefone = fieldTelefone.getText();
-        String cargoSelecionado = (String) comboBoxCargo.getSelectedItem();
-        String municipioSelecionado = (String) comboBoxMunicipio.getSelectedItem();
 
-        // Agora, chame o método da classe GerenciadorCadastro
+        // Obtenha o objeto Municipio selecionado
+        Municipio municipioSelecionado = (Municipio) comboBoxMunicipio.getSelectedItem();
+
+        // Obtenha o objeto Cargo selecionado
+        Cargo cargoSelecionado = (Cargo) comboBoxCargo.getSelectedItem();
+
+        System.out.println("Cadastrando participante: " + nome);
+        System.out.println("Município selecionado: " + municipioSelecionado);
+        System.out.println("Cargo selecionado: " + cargoSelecionado);
+
+        // Retorne o participante criado
         return GerenciarCadastro.cadastrarParticipante(2, CPF, senha, nome, endereco, dataNascimento, telefone, cargoSelecionado, municipioSelecionado);
     }
+
+
 }
