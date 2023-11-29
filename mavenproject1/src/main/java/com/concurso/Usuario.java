@@ -1,5 +1,8 @@
 package com.concurso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Usuario {
     private static int proximoId = 1;
     private final int id;
@@ -11,7 +14,7 @@ public class Usuario {
     private String dataDeNascimento;
     private String telefone;
 
-    public Usuario(int perfil,String CPF, String senha, String nome, String endereco, String dataDeNascimento, String telefone) {
+    public Usuario(int perfil, String CPF, String senha, String nome, String endereco, String dataDeNascimento, String telefone) {
         this.id = proximoId++;
         this.perfil = perfil;
         this.CPF = CPF;
@@ -24,17 +27,17 @@ public class Usuario {
 
     // Getters e Setters
     public int getId() {
-    return id;
+        return id;
     }
-    
-     public int getPerfil() {
+
+    public int getPerfil() {
         return perfil;
     }
 
     public void setPerfil(int perfil) {
         this.perfil = perfil;
     }
-    
+
     public String getCPF() {
         return CPF;
     }

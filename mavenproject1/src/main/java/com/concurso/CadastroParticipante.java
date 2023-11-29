@@ -25,7 +25,7 @@ public class CadastroParticipante extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(9, 2));
+        panel.setLayout(new GridLayout(12, 2));
 
         JLabel labelNome = new JLabel("Nome:");
         JLabel labelCPF = new JLabel("CPF:");
@@ -76,8 +76,10 @@ public class CadastroParticipante extends JFrame {
         panel.add(labelCargo);
         panel.add(comboBoxCargo);
         panel.add(new JLabel()); // Espaçamento
-        panel.add(buttonCadastrar);
+        panel.add(new JLabel()); // Espaçamento
         panel.add(buttonLogin);
+        panel.add(buttonCadastrar);
+        
 
         getContentPane().add(panel);
         setSize(500, 400);
@@ -116,7 +118,7 @@ public class CadastroParticipante extends JFrame {
         System.out.println("Cargo selecionado: " + cargoSelecionado);
 
         // Retorne o participante criado
-        return GerenciarCadastro.cadastrarParticipante(2, CPF, senha, nome, endereco, dataNascimento, telefone, cargoSelecionado, municipioSelecionado);
+        return GerenciarCadastro.cadastrarParticipante(CPF, senha, nome, endereco, dataNascimento, telefone, cargoSelecionado, municipioSelecionado);
     }
 
 

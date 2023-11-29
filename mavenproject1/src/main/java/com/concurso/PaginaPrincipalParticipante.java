@@ -51,7 +51,7 @@ public class PaginaPrincipalParticipante extends JFrame {
         if (participante != null) {
             PerfilParticipante perfilParticipante = new PerfilParticipante(participante);
             perfilParticipante.setVisible(true);
-            PaginaPrincipal.this.dispose();
+            //PaginaPrincipal.this.dispose();
         } else {
             // Trate o caso em que o participante não está logado
             JOptionPane.showMessageDialog(null, "Usuário não logado.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -61,7 +61,7 @@ public class PaginaPrincipalParticipante extends JFrame {
     private void exibirPaginaLogin() {
         PaginaLogin paginaLogin = new PaginaLogin();
         paginaLogin.setVisible(true);
-        PaginaPrincipal.this.dispose();
+        //PaginaPrincipal.this.dispose();
     }
 
     private void encerrarSessao() {

@@ -28,7 +28,7 @@ public class PaginaLogin extends JFrame {
         JButton buttonLogin = new JButton("Login");
         JButton buttonCadastro = new JButton("Cadastrar-se");
 
-        buttonLogin.addActionListener(e -> realizarLogin());
+        buttonLogin.addActionListener(this::realizarLogin);
         buttonCadastro.addActionListener(e -> exibirPaginaCadastro());
 
         panel.add(labelCPF);
@@ -45,8 +45,7 @@ public class PaginaLogin extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    private void realizarLogin() {
-        // Lógica de autenticação aqui
+    private void realizarLogin(ActionEvent e) {
         String cpfDigitado = fieldCPF.getText();
         String senhaDigitada = new String(fieldSenha.getPassword());
 
@@ -58,9 +57,10 @@ public class PaginaLogin extends JFrame {
     }
 
     private boolean autenticarUsuario(String cpf, String senha) {
-        // Lógica real de autenticação aqui
-        // Substitua pelo seu mecanismo de autenticação
-        return "cpfExemplo".equals(cpf) && "senhaExemplo".equals(senha);
+        // Verifica se é um funcionário
+        Usuario usuario = GerenciarCadastro.getUsuarioByCPF(cpf);
+        System.out.println("Usuário encontrado: " + usuario);
+        return usuario != null && usuario.getSenha().equals(senha);
     }
 
     private void exibirPaginaPrincipal() {
@@ -72,7 +72,7 @@ public class PaginaLogin extends JFrame {
 
     private void exibirPaginaCadastro() {
         SwingUtilities.invokeLater(() -> {
-            new CadastroParticipante(Cargo.getCargos(), Municipio.getMunicipios()).setVisible(true);
+            new CadastroParticipante(Municipio.getMunicipios(), Cargo.getCargos()).setVisible(true);
             dispose();
         });
     }
