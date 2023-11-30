@@ -54,8 +54,7 @@ public class PaginaPrincipalFuncionario extends JFrame {
         buttonParticipantesPorVaga = new JButton("Participantes por Vaga");
         setButtonStyle(buttonParticipantesPorVaga);
         buttonParticipantesPorVaga.addActionListener(e -> {
-            buttonClickHandler.accept("Participantes por Vaga");
-            dispose();
+            exibirPaginaParticipantesPorVaga();
         });
 
         buttonSair = new JButton("Sair");
@@ -88,6 +87,17 @@ public class PaginaPrincipalFuncionario extends JFrame {
     private void exibirPaginaLogin() {
         SwingUtilities.invokeLater(() -> {
             new PaginaLogin().setVisible(true);
+        });
+    }
+
+    private void exibirPaginaParticipantesPorVaga() {
+        java.util.List<String> listaMunicipios = Municipio.getMunicipios();
+        java.util.List<String> listaCargos = Cargo.getCargos();
+
+        SwingUtilities.invokeLater(() -> {
+            PaginaParticipantesPorVaga pagina = new PaginaParticipantesPorVaga(listaMunicipios, listaCargos);
+            pagina.setVisible(true);
+            PaginaPrincipalFuncionario.this.dispose();
         });
     }
 }

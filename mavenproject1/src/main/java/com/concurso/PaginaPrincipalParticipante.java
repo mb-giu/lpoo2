@@ -36,7 +36,7 @@ public class PaginaPrincipalParticipante extends JFrame {
         Usuario usuario = SessaoUsuario.getUsuarioLogado();
         if (usuario != null && usuario instanceof Participante) {
             new PerfilParticipante((Participante) usuario).setVisible(true);
-            this.dispose();
+            PaginaPrincipalParticipante.this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Usuário não logado ou não é um participante.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -46,20 +46,25 @@ public class PaginaPrincipalParticipante extends JFrame {
         java.util.List<String> listaMunicipios = Municipio.getMunicipios();
         java.util.List<String> listaCargos = Cargo.getCargos();
 
-        PaginaParticipantesPorVaga pagina = new PaginaParticipantesPorVaga(listaMunicipios, listaCargos);
-        pagina.setVisible(true);
-        PaginaPrincipalParticipante.this.dispose();
+        // Usando uma referência final para a instância atual de PaginaPrincipalParticipante
+        final PaginaPrincipalParticipante paginaPrincipal = this;
+
+        SwingUtilities.invokeLater(() -> {
+            new PaginaParticipantesPorVaga(listaMunicipios, listaCargos).setVisible(true);
+            paginaPrincipal.dispose();
+        });
     }
 
     private void encerrarSessao(ActionEvent e) {
         SessaoUsuario.encerrarSessao();
         exibirPaginaLogin();
-        this.dispose();
+        PaginaPrincipalParticipante.this.dispose();
     }
 
     private void exibirPaginaLogin() {
         SwingUtilities.invokeLater(() -> {
             new PaginaLogin().setVisible(true);
+            PaginaPrincipalParticipante.this.dispose();
         });
     }
 }

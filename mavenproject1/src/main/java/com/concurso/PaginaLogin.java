@@ -50,7 +50,7 @@ public class PaginaLogin extends JFrame {
         String senhaDigitada = new String(fieldSenha.getPassword());
 
         if (autenticarUsuario(cpfDigitado, senhaDigitada)) {
-            exibirPaginaPrincipal();
+            //exibirPaginaPrincipal();
         } else {
             JOptionPane.showMessageDialog(null, "Login inválido. Tente novamente.", "Erro de Login", JOptionPane.ERROR_MESSAGE);
         }
@@ -61,7 +61,7 @@ public class PaginaLogin extends JFrame {
 
         if (usuario != null && usuario.getSenha().equals(senha)) {
             SessaoUsuario.setUsuarioLogado(usuario);
-            redirecionarPaginaPrincipal(usuario.getPerfil());
+            exibirPaginaPrincipal();
             return true;
         }
 
@@ -73,10 +73,10 @@ public class PaginaLogin extends JFrame {
             Usuario usuarioLogado = SessaoUsuario.getUsuarioLogado();
             if (usuarioLogado != null && usuarioLogado.getPerfil() == 1) {
                 new PaginaPrincipalFuncionario(buttonText -> {
-                    // Lógica para lidar com cliques de botões na PaginaPrincipalFuncionario
-                    System.out.println("Botão clicado: " + buttonText);
+                    System.out.println("Botão clicado (Funcionário): " + buttonText);
                 }).setVisible(true);
             } else {
+                System.out.println("Abrindo Página Principal do Participante");
                 new PaginaPrincipalParticipante().setVisible(true);
             }
             dispose();
