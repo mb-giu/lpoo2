@@ -52,8 +52,8 @@ public class PaginaParticipantesPorVaga extends JFrame {
 
         // Suponha que inicialmente todas as vagas e inscritos são 10 (altere conforme necessário)
         for (String cargo : cargos) {
-            vagasPorCargo.put(cargo, 10);
-            inscritosPorCargo.put(cargo, 10);
+            vagasPorCargo.put(cargo, 20);
+            inscritosPorCargo.put(cargo, 80);
         }
 
         // Adiciona cargos, vagas e inscritos

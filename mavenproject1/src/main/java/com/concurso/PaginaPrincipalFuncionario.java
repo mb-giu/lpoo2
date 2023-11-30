@@ -26,7 +26,7 @@ public class PaginaPrincipalFuncionario extends JFrame {
         buttonCadastrarFuncionario = new JButton("Cadastrar Funcionário");
         setButtonStyle(buttonCadastrarFuncionario);
         buttonCadastrarFuncionario.addActionListener(e -> {
-            buttonClickHandler.accept("Cadastrar Funcionário");
+            exibirCadastroFuncionario();
             dispose();
         });
 
@@ -87,6 +87,13 @@ public class PaginaPrincipalFuncionario extends JFrame {
     private void exibirPaginaLogin() {
         SwingUtilities.invokeLater(() -> {
             new PaginaLogin().setVisible(true);
+        });
+    }
+    
+    private void exibirCadastroFuncionario() {
+        SwingUtilities.invokeLater(() -> {
+            new CadastroFuncionario().setVisible(true);
+            PaginaPrincipalFuncionario.this.dispose();
         });
     }
 
