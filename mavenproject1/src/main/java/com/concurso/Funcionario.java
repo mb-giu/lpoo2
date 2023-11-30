@@ -15,7 +15,7 @@ public class Funcionario extends Usuario {
         adicionarFunc("123", "123", "ADM", "Rua", "01/01/2000", "123456789");
     }
 
-    private static void adicionarFunc(String CPF, String senha, String nome, String endereco,
+    public static void adicionarFunc(String CPF, String senha, String nome, String endereco,
                                   String dataDeNascimento, String telefone) {
         Funcionario novoFunc = new Funcionario(CPF, senha, nome, endereco, dataDeNascimento, telefone);
         listaFunc.add(novoFunc);

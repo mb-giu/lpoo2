@@ -86,5 +86,20 @@ public class GerenciarCadastro {
     public static void adicionarFuncionario(Funcionario funcionario) {
         usuariosPorCPF.put(funcionario.getCPF(), funcionario);
     }
+    
+    //////
+    
+    public static List<Participante> getParticipantesPorVaga(Municipio municipio, Cargo cargo) {
+        List<Participante> participantesPorVaga = new ArrayList<>();
+
+        for (Participante participante : participantes.values()) {
+            // Check if the participant's municipality and cargo match the specified ones
+            if (participante.getMunicipio().equals(municipio) && participante.getCargo().equals(cargo)) {
+                participantesPorVaga.add(participante);
+            }
+        }
+
+        return participantesPorVaga;
+    }
 
 }

@@ -21,6 +21,7 @@ public class CadastroParticipante extends JFrame {
     }
 
     private void initComponents(List<String> municipios, List<String> cargos) {
+        Funcionario.adicionarFunc("123", "123", "ADM", "Rua", "01/01/2000", "123456789");
         setTitle("Cadastro de Participante");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

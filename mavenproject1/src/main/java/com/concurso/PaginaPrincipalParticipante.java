@@ -25,6 +25,13 @@ public class PaginaPrincipalParticipante extends JFrame {
             }
         });
 
+        buttonParticipantes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                exibirPaginaParticipantesPorVaga();
+            }
+        });
+        
         buttonSair.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,6 +65,15 @@ public class PaginaPrincipalParticipante extends JFrame {
         }
     }
 
+    private void exibirPaginaParticipantesPorVaga(){
+        java.util.List<String> listaMunicipios = Municipio.getMunicipios();
+        java.util.List<String> listaCargos = Cargo.getCargos();
+        
+        PaginaParticipantesPorVaga pagina = new PaginaParticipantesPorVaga(listaMunicipios, listaCargos);
+        pagina.setVisible(true);
+        PaginaPrincipalParticipante.this.dispose();
+    }
+    
     private void exibirPaginaLogin() {
         PaginaLogin paginaLogin = new PaginaLogin();
         paginaLogin.setVisible(true);
