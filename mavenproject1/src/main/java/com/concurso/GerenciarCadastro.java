@@ -21,30 +21,20 @@ public class GerenciarCadastro {
     }
     
     public static Funcionario getFuncionarioByCPF(String cpf) {
-    // Verificar na lista estática
         for (Funcionario func : Funcionario.getListaFunc()) {
             if (func.getCPF().equals(cpf)) {
                 return func;
             }
         }
-        // Verificar na lista de funcionários cadastrados
-        //for (Funcionario funcionario : funcionarios.values()) {
-            // if (funcionario.getCPF().equals(cpf)) {
-             //    return funcionario;
-           // }
-        // }
-        // Se não encontrar em nenhuma das listas, retornar null
         return null;
     }
 
      public static Participante getParticipanteByCPF(String cpf) {
-        // Verificar na lista de participantes
         for (Participante participante : participantes.values()) {
             if (participante.getCPF().equals(cpf)) {
                 return participante;
             }
         }
-        // Se não encontrar na lista de participantes, retornar null
         return null;
     }
     

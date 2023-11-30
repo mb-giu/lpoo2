@@ -3,12 +3,12 @@ package com.concurso;
 import javax.swing.*;
 import java.awt.*;
 import java.util.function.Consumer;
+import java.util.*;
 
 public class PaginaPrincipalFuncionario extends JFrame {
     private JButton buttonCadastrarFuncionario;
     private JButton buttonCadastrarMunicipio;
     private JButton buttonCadastrarCargo;
-    private JButton buttonCadastrarVagas;
     private JButton buttonParticipantesPorVaga;
     private JButton buttonSair;
 
@@ -21,7 +21,7 @@ public class PaginaPrincipalFuncionario extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(6, 1, 10, 10));
+        panel.setLayout(new GridLayout(5, 1, 10, 10));
 
         buttonCadastrarFuncionario = new JButton("Cadastrar Funcionário");
         setButtonStyle(buttonCadastrarFuncionario);
@@ -33,21 +33,14 @@ public class PaginaPrincipalFuncionario extends JFrame {
         buttonCadastrarMunicipio = new JButton("Cadastrar Município");
         setButtonStyle(buttonCadastrarMunicipio);
         buttonCadastrarMunicipio.addActionListener(e -> {
-            buttonClickHandler.accept("Cadastrar Município");
+            exibirCadastroMunicipio();
             dispose();
         });
 
         buttonCadastrarCargo = new JButton("Cadastrar Cargo");
         setButtonStyle(buttonCadastrarCargo);
         buttonCadastrarCargo.addActionListener(e -> {
-            buttonClickHandler.accept("Cadastrar Cargo");
-            dispose();
-        });
-
-        buttonCadastrarVagas = new JButton("Cadastrar Vagas");
-        setButtonStyle(buttonCadastrarVagas);
-        buttonCadastrarVagas.addActionListener(e -> {
-            buttonClickHandler.accept("Cadastrar Vagas");
+            exibirCadastroCargo();
             dispose();
         });
 
@@ -68,7 +61,6 @@ public class PaginaPrincipalFuncionario extends JFrame {
         panel.add(buttonCadastrarFuncionario);
         panel.add(buttonCadastrarMunicipio);
         panel.add(buttonCadastrarCargo);
-        panel.add(buttonCadastrarVagas);
         panel.add(buttonParticipantesPorVaga);
         panel.add(buttonSair);
 
@@ -89,7 +81,7 @@ public class PaginaPrincipalFuncionario extends JFrame {
             new PaginaLogin().setVisible(true);
         });
     }
-    
+
     private void exibirCadastroFuncionario() {
         SwingUtilities.invokeLater(() -> {
             new CadastroFuncionario().setVisible(true);
@@ -97,8 +89,22 @@ public class PaginaPrincipalFuncionario extends JFrame {
         });
     }
 
+    private void exibirCadastroMunicipio() {
+        SwingUtilities.invokeLater(() -> {
+            new CadastroMunicipio().setVisible(true);
+            PaginaPrincipalFuncionario.this.dispose();
+        });
+    }
+
+    private void exibirCadastroCargo() {
+        SwingUtilities.invokeLater(() -> {
+            new CadastroCargo().setVisible(true);
+            PaginaPrincipalFuncionario.this.dispose();
+        });
+    }
+
     private void exibirPaginaParticipantesPorVaga() {
-        java.util.List<String> listaMunicipios = Municipio.getMunicipios();
+    	java.util.List<String> listaMunicipios = Municipio.getMunicipios();
         java.util.List<String> listaCargos = Cargo.getCargos();
 
         SwingUtilities.invokeLater(() -> {

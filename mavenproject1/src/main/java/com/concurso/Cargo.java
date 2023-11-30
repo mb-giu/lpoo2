@@ -19,7 +19,7 @@ public class Cargo {
 
 //Métodos    
    
-    private static List<Cargo> listaCargos = new ArrayList<>();
+    public static List<Cargo> listaCargos = new ArrayList<>();
     static {
         adicionarCargoAutomatico("Analista de Desenvolvimento", 5000.0, 32);
         adicionarCargoAutomatico("Gerente de Projetos", 8000.0, 45);
