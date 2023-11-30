@@ -50,7 +50,6 @@ public class PaginaLogin extends JFrame {
         String senhaDigitada = new String(fieldSenha.getPassword());
 
         if (autenticarUsuario(cpfDigitado, senhaDigitada)) {
-            SessaoUsuario.setParticipanteLogado(GerenciarCadastro.getParticipanteByCPF(cpfDigitado));
             exibirPaginaPrincipal();
         } else {
             JOptionPane.showMessageDialog(null, "Login inválido. Tente novamente.", "Erro de Login", JOptionPane.ERROR_MESSAGE);
@@ -58,15 +57,42 @@ public class PaginaLogin extends JFrame {
     }
 
     private boolean autenticarUsuario(String cpf, String senha) {
-        // Verifica se é um funcionário
         Usuario usuario = GerenciarCadastro.getUsuarioByCPF(cpf);
-        System.out.println("Usuário encontrado: " + usuario);
-        return usuario != null && usuario.getSenha().equals(senha);
+
+        if (usuario != null && usuario.getSenha().equals(senha)) {
+            SessaoUsuario.setUsuarioLogado(usuario);
+            redirecionarPaginaPrincipal(usuario.getPerfil());
+            return true;
+        }
+
+        return false;
     }
 
     private void exibirPaginaPrincipal() {
         SwingUtilities.invokeLater(() -> {
-            new PaginaPrincipalParticipante().setVisible(true);
+            Usuario usuarioLogado = SessaoUsuario.getUsuarioLogado();
+            if (usuarioLogado != null && usuarioLogado.getPerfil() == 1) {
+                new PaginaPrincipalFuncionario(buttonText -> {
+                    // Lógica para lidar com cliques de botões na PaginaPrincipalFuncionario
+                    System.out.println("Botão clicado: " + buttonText);
+                }).setVisible(true);
+            } else {
+                new PaginaPrincipalParticipante().setVisible(true);
+            }
+            dispose();
+        });
+    }
+
+    private void redirecionarPaginaPrincipal(int perfil) {
+        SwingUtilities.invokeLater(() -> {
+            if (perfil == 1) {
+                new PaginaPrincipalFuncionario(buttonText -> {
+                    // Lógica para lidar com cliques de botões na PaginaPrincipalFuncionario
+                    System.out.println("Botão clicado: " + buttonText);
+                }).setVisible(true);
+            } else if (perfil == 2) {
+                new PaginaPrincipalParticipante().setVisible(true);
+            }
             dispose();
         });
     }

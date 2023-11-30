@@ -3,7 +3,6 @@ package com.concurso;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class PaginaPrincipalParticipante extends JFrame {
     public PaginaPrincipalParticipante() {
@@ -18,29 +17,9 @@ public class PaginaPrincipalParticipante extends JFrame {
         JButton buttonParticipantes = new JButton("Participantes por Vaga");
         JButton buttonSair = new JButton("Sair");
 
-        buttonPerfil.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                exibirPaginaPerfil();
-            }
-        });
-
-        buttonParticipantes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                exibirPaginaParticipantesPorVaga();
-            }
-        });
-        
-        buttonSair.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                encerrarSessao();
-                exibirPaginaLogin();
-            }
-        });
-
-        // Adicione mais lógica para o botão "Participantes por Vaga" se necessário
+        buttonPerfil.addActionListener(this::exibirPaginaPerfil);
+        buttonParticipantes.addActionListener(this::exibirPaginaParticipantesPorVaga);
+        buttonSair.addActionListener(this::encerrarSessao);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3, 1));
@@ -53,34 +32,34 @@ public class PaginaPrincipalParticipante extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    private void exibirPaginaPerfil() {
-        Participante participante = SessaoUsuario.getParticipanteLogado();
-        if (participante != null) {
-            PerfilParticipante perfilParticipante = new PerfilParticipante(participante);
-            perfilParticipante.setVisible(true);
-            PaginaPrincipalParticipante.this.dispose();
+    private void exibirPaginaPerfil(ActionEvent e) {
+        Usuario usuario = SessaoUsuario.getUsuarioLogado();
+        if (usuario != null && usuario instanceof Participante) {
+            new PerfilParticipante((Participante) usuario).setVisible(true);
+            this.dispose();
         } else {
-            // Trate o caso em que o participante não está logado
-            JOptionPane.showMessageDialog(null, "Usuário não logado.", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Usuário não logado ou não é um participante.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void exibirPaginaParticipantesPorVaga(){
+    private void exibirPaginaParticipantesPorVaga(ActionEvent e) {
         java.util.List<String> listaMunicipios = Municipio.getMunicipios();
         java.util.List<String> listaCargos = Cargo.getCargos();
-        
+
         PaginaParticipantesPorVaga pagina = new PaginaParticipantesPorVaga(listaMunicipios, listaCargos);
         pagina.setVisible(true);
         PaginaPrincipalParticipante.this.dispose();
     }
-    
-    private void exibirPaginaLogin() {
-        PaginaLogin paginaLogin = new PaginaLogin();
-        paginaLogin.setVisible(true);
-        PaginaPrincipalParticipante.this.dispose();
+
+    private void encerrarSessao(ActionEvent e) {
+        SessaoUsuario.encerrarSessao();
+        exibirPaginaLogin();
+        this.dispose();
     }
 
-    private void encerrarSessao() {
-        SessaoUsuario.encerrarSessao();
+    private void exibirPaginaLogin() {
+        SwingUtilities.invokeLater(() -> {
+            new PaginaLogin().setVisible(true);
+        });
     }
 }

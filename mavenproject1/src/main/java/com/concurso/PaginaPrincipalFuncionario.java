@@ -10,7 +10,7 @@ public class PaginaPrincipalFuncionario extends JFrame {
     private JButton buttonCadastrarCargo;
     private JButton buttonCadastrarVagas;
     private JButton buttonParticipantesPorVaga;
-    private JButton buttonVoltar;
+    private JButton buttonSair;
 
     public PaginaPrincipalFuncionario(Consumer<String> buttonClickHandler) {
         initComponents(buttonClickHandler);
@@ -25,34 +25,53 @@ public class PaginaPrincipalFuncionario extends JFrame {
 
         buttonCadastrarFuncionario = new JButton("Cadastrar Funcionário");
         setButtonStyle(buttonCadastrarFuncionario);
-        buttonCadastrarFuncionario.addActionListener(e -> buttonClickHandler.accept("Cadastrar Funcionário"));
+        buttonCadastrarFuncionario.addActionListener(e -> {
+            buttonClickHandler.accept("Cadastrar Funcionário");
+            dispose();
+        });
 
         buttonCadastrarMunicipio = new JButton("Cadastrar Município");
         setButtonStyle(buttonCadastrarMunicipio);
-        buttonCadastrarMunicipio.addActionListener(e -> buttonClickHandler.accept("Cadastrar Município"));
+        buttonCadastrarMunicipio.addActionListener(e -> {
+            buttonClickHandler.accept("Cadastrar Município");
+            dispose();
+        });
 
         buttonCadastrarCargo = new JButton("Cadastrar Cargo");
         setButtonStyle(buttonCadastrarCargo);
-        buttonCadastrarCargo.addActionListener(e -> buttonClickHandler.accept("Cadastrar Cargo"));
+        buttonCadastrarCargo.addActionListener(e -> {
+            buttonClickHandler.accept("Cadastrar Cargo");
+            dispose();
+        });
 
         buttonCadastrarVagas = new JButton("Cadastrar Vagas");
         setButtonStyle(buttonCadastrarVagas);
-        buttonCadastrarVagas.addActionListener(e -> buttonClickHandler.accept("Cadastrar Vagas"));
+        buttonCadastrarVagas.addActionListener(e -> {
+            buttonClickHandler.accept("Cadastrar Vagas");
+            dispose();
+        });
 
         buttonParticipantesPorVaga = new JButton("Participantes por Vaga");
         setButtonStyle(buttonParticipantesPorVaga);
-        buttonParticipantesPorVaga.addActionListener(e -> buttonClickHandler.accept("Participantes por Vaga"));
+        buttonParticipantesPorVaga.addActionListener(e -> {
+            buttonClickHandler.accept("Participantes por Vaga");
+            dispose();
+        });
 
-        buttonVoltar = new JButton("Voltar");
-        setButtonStyle(buttonVoltar);
-        buttonVoltar.addActionListener(e -> buttonClickHandler.accept("Voltar"));
+        buttonSair = new JButton("Sair");
+        setButtonStyle(buttonSair);
+        buttonSair.addActionListener(e -> {
+            SessaoUsuario.encerrarSessao();
+            dispose();
+            exibirPaginaLogin();
+        });
 
         panel.add(buttonCadastrarFuncionario);
         panel.add(buttonCadastrarMunicipio);
         panel.add(buttonCadastrarCargo);
         panel.add(buttonCadastrarVagas);
         panel.add(buttonParticipantesPorVaga);
-        panel.add(buttonVoltar);
+        panel.add(buttonSair);
 
         getContentPane().add(panel);
         pack();
@@ -64,5 +83,11 @@ public class PaginaPrincipalFuncionario extends JFrame {
     private void setButtonStyle(JButton button) {
         button.setPreferredSize(new Dimension(200, 30));
         button.setFont(new Font("Arial", Font.PLAIN, 14));
+    }
+
+    private void exibirPaginaLogin() {
+        SwingUtilities.invokeLater(() -> {
+            new PaginaLogin().setVisible(true);
+        });
     }
 }

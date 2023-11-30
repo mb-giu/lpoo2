@@ -65,9 +65,15 @@ public class PerfilParticipante extends JFrame {
     }
 
     private void exibirEditarPerfil(ActionEvent e) {
+    Usuario usuarioLogado = SessaoUsuario.getUsuarioLogado();
+    if (usuarioLogado instanceof Participante) {
+        Participante participante = (Participante) usuarioLogado;
         SwingUtilities.invokeLater(() -> {
-            new EditarPerfilParticipante(SessaoUsuario.getParticipanteLogado()).setVisible(true);
+            new EditarPerfilParticipante(participante).setVisible(true);
             PerfilParticipante.this.dispose();
         });
+    } else {
+        JOptionPane.showMessageDialog(null, "Usuário logado não é um participante.", "Erro", JOptionPane.ERROR_MESSAGE);
     }
+}
 }

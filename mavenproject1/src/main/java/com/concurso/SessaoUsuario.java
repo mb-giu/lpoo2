@@ -1,21 +1,21 @@
 package com.concurso;
 
 public class SessaoUsuario {
-    private static Participante participanteLogado;
+    private static Usuario usuarioLogado;
 
-    public static Participante getParticipanteLogado() {
-        return participanteLogado;
+    public static Usuario getUsuarioLogado() {
+        return usuarioLogado;
     }
 
-    public static void setParticipanteLogado(Participante participante) {
-        participanteLogado = participante;
+    public static void setUsuarioLogado(Usuario usuario) {
+        usuarioLogado = usuario;
     }
 
     public static void encerrarSessao() {
-        participanteLogado = null;
+        usuarioLogado = null;
     }
 
     public static boolean isUsuarioLogado() {
-        return participanteLogado != null;
+        return usuarioLogado != null;
     }
 }
