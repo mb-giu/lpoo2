@@ -58,7 +58,7 @@ public class PaginaParticipantesPorVaga extends JFrame {
 
         buttonVoltar = new JButton("Voltar");
         setButtonStyle(buttonVoltar);
-        buttonVoltar.addActionListener(e -> voltarParaPaginaPrincipal());
+        buttonVoltar.addActionListener(e -> exibirPaginaPrincipal());
 
         panel.add(inputPanel, BorderLayout.NORTH);
         panel.add(panelCargos, BorderLayout.CENTER);
@@ -76,11 +76,26 @@ public class PaginaParticipantesPorVaga extends JFrame {
         button.setFont(new Font("Arial", Font.PLAIN, 14));
     }
 
-    private void voltarParaPaginaPrincipal() {
+    private void exibirPaginaPrincipal() {
         SwingUtilities.invokeLater(() -> {
-            new PaginaPrincipalParticipante().setVisible(true);
-            PaginaParticipantesPorVaga.this.dispose();
+            Usuario usuarioLogado = SessaoUsuario.getUsuarioLogado();
+            if (usuarioLogado != null) {
+                int perfil = obterPerfilUsuario(usuarioLogado);
+                if (perfil == 1) {
+                    new PaginaPrincipalFuncionario(buttonText -> {
+                        System.out.println("Botão clicado (Funcionário): " + buttonText);
+                    }).setVisible(true);
+                } else {
+                    System.out.println("Abrindo Página Principal do Participante");
+                    new PaginaPrincipalParticipante().setVisible(true);
+                }
+                dispose();
+            }
         });
+    }
+
+    private int obterPerfilUsuario(Usuario usuario) {
+        return usuario.getPerfil();
     }
 
     private int obterVagasPorCargo(String cargo) {
