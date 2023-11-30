@@ -50,6 +50,7 @@ public class PaginaLogin extends JFrame {
         String senhaDigitada = new String(fieldSenha.getPassword());
 
         if (autenticarUsuario(cpfDigitado, senhaDigitada)) {
+            SessaoUsuario.setParticipanteLogado(GerenciarCadastro.getParticipanteByCPF(cpfDigitado));
             exibirPaginaPrincipal();
         } else {
             JOptionPane.showMessageDialog(null, "Login inválido. Tente novamente.", "Erro de Login", JOptionPane.ERROR_MESSAGE);

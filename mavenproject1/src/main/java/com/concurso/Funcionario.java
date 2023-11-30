@@ -16,10 +16,12 @@ public class Funcionario extends Usuario {
     }
 
     private static void adicionarFunc(String CPF, String senha, String nome, String endereco,
-                                      String dataDeNascimento, String telefone) {
+                                  String dataDeNascimento, String telefone) {
         Funcionario novoFunc = new Funcionario(CPF, senha, nome, endereco, dataDeNascimento, telefone);
         listaFunc.add(novoFunc);
+        GerenciarCadastro.adicionarFuncionario(novoFunc);
     }
+
 
     public static List<Funcionario> getListaFunc() {
         return listaFunc;

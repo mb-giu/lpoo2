@@ -2,6 +2,7 @@ package com.concurso;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class PerfilParticipante extends JFrame {
     private JLabel labelNome;
@@ -38,9 +39,35 @@ public class PerfilParticipante extends JFrame {
         panel.add(labelMunicipio);
         panel.add(labelCargo);
 
-        getContentPane().add(panel);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        
+        JButton buttonVoltar = new JButton("Voltar");
+        JButton buttonEditarPerfil = new JButton("Editar Perfil");
+
+        buttonVoltar.addActionListener(this::voltarParaPaginaPrincipal);
+        buttonEditarPerfil.addActionListener(this::exibirEditarPerfil);
+
+        buttonPanel.add(buttonVoltar);
+        buttonPanel.add(buttonEditarPerfil);
+
+        getContentPane().add(panel, BorderLayout.CENTER);
+        getContentPane().add(buttonPanel, BorderLayout.SOUTH);
         setSize(400, 300);
         setLocationRelativeTo(null);
     }
 
+    private void voltarParaPaginaPrincipal(ActionEvent e) {
+        SwingUtilities.invokeLater(() -> {
+            new PaginaPrincipalParticipante().setVisible(true);
+            PerfilParticipante.this.dispose();
+        });
+    }
+
+    private void exibirEditarPerfil(ActionEvent e) {
+        SwingUtilities.invokeLater(() -> {
+            new EditarPerfilParticipante(SessaoUsuario.getParticipanteLogado()).setVisible(true);
+            PerfilParticipante.this.dispose();
+        });
+    }
 }

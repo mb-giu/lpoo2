@@ -86,12 +86,6 @@ public class CadastroParticipante extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
     }
-
-    private void exibirInicialParticipante(Participante participante) {
-        PerfilParticipante inicialParticipante = new PerfilParticipante(participante);
-        inicialParticipante.setVisible(true);
-        CadastroParticipante.this.dispose();
-    }
     
     private void exibirPaginaLogin() {
         PaginaLogin paginaLogin = new PaginaLogin();
